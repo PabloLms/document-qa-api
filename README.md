@@ -1,2 +1,7 @@
-# document-qa-api
-Production-ready RAG system with streaming responses and Docker deployment
+### 📫 Let's Connect
+   - 💼 LinkedIn: [https://www.linkedin.com/in/pablolms/]
+   - 📧 Email: [pablolomusan@hotmail.com]
+   
+   ---
+   
+   💡 Open to remote opportunities in **AI Engineering, Backend Development, and Technical Leadership**
