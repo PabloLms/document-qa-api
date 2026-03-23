@@ -1,0 +1,19 @@
+services:
+  app:
+    build:
+      context: .
+      args:
+        - ARG_PORT=8000
+    environment:
+      - ANTHROPIC_API_KEY={ANTHROPIC_API_KEY}
+    ports:
+      - 8000:8000
+    volumes:
+      - ./chromadb_data:/app/chromadb_data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3  
+    

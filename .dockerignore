@@ -1,0 +1,5 @@
+/tests
+.env.enxample
+.env
+.venv
+.git
