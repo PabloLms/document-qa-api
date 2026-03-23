@@ -29,7 +29,7 @@ async def ingest_document(doc: DocumentInput):
     """
     try:
         # Process document (chunking)
-        processed = process_document(doc.content)
+        processed = process_document(doc.content,doc.chunk_size,doc.overlap)
         
         if not processed['chunks']:
             raise HTTPException(
@@ -84,6 +84,25 @@ async def ask_question(query: QuestionInput):
         
         return AnswerResponse(
             answer=answer,
+            sources=similar_docs,
+            model_used="claude-sonnet-4-20250514",
+            chunks_used=len(similar_docs)
+        )
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error answering question: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/ask-test", response_model=AnswerResponse)
+async def ask_question_test(query: QuestionInput):
+    """Ask a question (non-streaming response)."""
+    try:
+        # Search for relevant context
+        similar_docs = search_similar(query.question, top_k=query.top_k)
+        return AnswerResponse(
+            answer="test",
             sources=similar_docs,
             model_used="claude-sonnet-4-20250514",
             chunks_used=len(similar_docs)

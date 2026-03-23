@@ -13,6 +13,16 @@ class DocumentInput(BaseModel):
         default=None,
         description="Optional metadata for the document"
     )
+    chunk_size:int=Field(
+        ...,
+        ge=50,
+        le=1000
+    )
+    overlap:int = Field(
+        ...,
+        ge=20,
+        le=200
+    )
     
     @validator('content')
     def content_not_empty(cls, v):

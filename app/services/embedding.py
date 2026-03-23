@@ -42,7 +42,7 @@ def chunk_text(
     
     return chunks
 
-def process_document(content: str) -> dict:
+def process_document(content: str,chunk_size: int,overlap: int) -> dict:
     """
     Process document: chunk and prepare metadata.
     
@@ -52,7 +52,7 @@ def process_document(content: str) -> dict:
     Returns:
         Dictionary with chunks and metadata
     """
-    chunks = chunk_text(content)
+    chunks = chunk_text(content,chunk_size,overlap)
     
     return {
         "chunks": chunks,
