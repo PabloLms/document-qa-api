@@ -20,8 +20,8 @@ class DocumentInput(BaseModel):
     )
     overlap:int = Field(
         ...,
-        ge=20,
-        le=200
+        ge=5,
+        le=600
     )
     
     @validator('content')

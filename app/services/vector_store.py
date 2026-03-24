@@ -41,14 +41,11 @@ def add_documents(
     if ids is None:
         ids = [f"doc_{uuid.uuid4().hex[:8]}" for _ in range(len(texts))]
     
-    # Add default metadata if not provided
-    if metadatas is None:
-        metadatas = [{}] * len(texts)
-    
     # Add to ChromaDB (automatically generates embeddings)
+
     collection.add(
         documents=texts,
-        metadatas=metadatas,
+        **({"metadatas": metadatas} if metadatas else {}),
         ids=ids
     )
     
